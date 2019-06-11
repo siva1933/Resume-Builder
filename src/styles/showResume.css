@@ -1,0 +1,168 @@
+.show_resume_main_div {
+  width: 80%;
+}
+
+.section {
+  margin-bottom: 10px;
+  padding-left: 40px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 20px
+}
+
+.content {
+  display: flex;
+}
+
+.content_head {
+  width: 30%;
+  font-family: Arial, serif;
+  font-size: 16.6px;
+  color: rgb(63, 133, 196);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.hr {
+  border-top: 0px dotted rgba(86, 85, 85, 0.2);
+  width: 91%;
+  background-color: rgba(86, 85, 85, 0.2);
+  height: 1px;
+  margin-left: 30px;
+}
+
+.content_description {
+  width: 55%;
+  display: block;
+  word-break: break-word;
+  color: rgb(84, 84, 84);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: rgb(84, 84, 84);
+}
+
+.rating_icon {
+  color: rgb(63, 133, 196);
+}
+
+.hobbies {
+  display: block;
+  word-wrap: break-word;
+  width: 27%;
+}
+
+.project_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_name {
+  font-family: Arial, serif;
+  font-size: 26.3px;
+  color: rgb(84, 84, 84);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+}
+
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  padding-top: 20px;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+}
+
+page[size="A4"] {
+  width: 21cm;
+  height: 29.7cm;
+}
+
+page[size="A4"][layout="landscape"] {
+  width: 29.7cm;
+  height: 21cm;
+}
+
+.profile_role {
+  font-family: Arial, serif;
+  font-size: 18.8px;
+  color: rgb(63, 133, 196);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.project_head_section {
+  margin-bottom: 20px;
+}
+
+.education_content {
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.edu_des {
+  display: flex;
+  flex-direction: column;
+}
+
+.institute {
+  width: 50%
+}
+
+.institute_address {
+  width: 50%;
+  justify-content: flex-end;
+}
+
+.professional_content {
+  display: flex;
+}
+
+.prof1 {
+  width: 50%;
+}
+
+.prof2 {
+  width: 30%;
+  display: flex;
+}
+
+.lang1 {
+  width: 50%;
+}
+
+.lang2 {
+  width: 50%;
+  justify-content: flex-end;
+}
+
+.lang {
+  width: 50%;
+}
+
+.profile_address {
+  word-break: break-word;
+  display: block;
+  width: 50%;
+  font-family: Arial, serif;
+  font-size: 12.6px;
+  color: rgb(84, 84, 84);
+  font-weight: normal;
+  margin-top: 10px;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.profile_contact {
+  font-family: Arial, serif;
+  font-size: 12.6px;
+  color: rgb(84, 84, 84);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+}

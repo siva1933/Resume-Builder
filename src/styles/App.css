@@ -1,0 +1,7 @@
+.ui.header:first-child {
+  margin-top: 1em;
+}
+
+body {
+  height: auto;
+}
