@@ -2,6 +2,12 @@
   margin-top: 1em;
 }
 
+.meta_div {
+  height: auto;
+  max-width: 250px;
+  margin-top: 4px !important;
+}
+
 body {
   height: auto;
 }
