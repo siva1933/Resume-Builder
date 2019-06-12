@@ -1,5 +1,6 @@
 
 import React from 'react'
+
 export const renderInput = ({ input, placeholder, type, meta: { touched, error, warning } }) => {
   return <><div className="ui input">
     <input type={type || "text"} placeholder={placeholder} {...input} />

@@ -1,56 +1,112 @@
 import React, { useState } from 'react';
+import { renderInput, renderTextArea } from '../globalComponents/formComponents';
+import { Field, reduxForm } from 'redux-form'
+import { required } from '../globalComponents/validations';
 
-const ProjectDetails = ({ setParentState }) => {
-  const [projectDetails, setProjectDetails] = useState({})
+const ProjectDetails = (props) => {
+  const [isAdd, setIsAdd] = useState(false)
+  const [projectDetails, setProjectDetails] = useState([])
+  const { handleSubmit } = props
+
+  const isAddSubmit = (formValues) => {
+    console.log(formValues, projectDetails)
+    setProjectDetails([...projectDetails, formValues])
+    props.reset()
+    setIsAdd(false)
+  }
+
+  const submitProjectDetails = (formValues) => {
+    console.log(formValues, projectDetails)
+
+    setProjectDetails([...projectDetails, formValues])
+  }
 
   return (
     <React.Fragment>
       <div className="ui text container">
         <h4 className="ui center aligned header">Project Details</h4>
-        <div className="ui segments">
-          <div className="ui segment">
-            <div class="ui input focus">
-              <input type="text" placeholder="Enter Project Title" onChange={(e) => {
-                projectDetails['title'] = e.target.value
-                setProjectDetails(projectDetails)
-                setParentState('projectDetails', projectDetails)
-              }}></input>
+        <form onSubmit={
+          handleSubmit(isAdd ? isAddSubmit : submitProjectDetails)
+        }
+        >
+          <div className="ui segments">
+            {projectDetails.length > 0 && projectDetails.map(item => {
+              return <div key={item.project_title} className="ui segment project_data">
+                <div className="show_data_headings">
+
+                  <div><b>Title: </b></div>
+                  <div><b>Duration: </b></div>
+                  <div><b>Description: </b></div>
+                  <div><b>Tech Stack: </b></div>
+
+                </div>
+                <div className="show_data_values">
+
+                  <div>{item.project_title}</div>
+                  <div>{item.from_date}-{item.to_date}</div>
+                  <div>{item.project_description}</div>
+                  <div>{item.tech_stack}</div>
+
+                </div>
+
+              </div>
+            })}
+            <div className="ui segment">
+              <div className="ui input focus">
+                <Field name="project_title" validate={required} component={renderInput} placeholder="Enter Project Title" />
+              </div>
+            </div>
+            <div className="ui segment date_section">
+              <div>From</div>
+              <div className="ui input focus">
+                <Field name="from_date" validate={required} type='date' component={renderInput} />
+              </div>
+              <div>To</div>
+              <div className="ui input focus">
+                <Field name="to_date" validate={required} type='date' component={renderInput} />
+              </div>
+            </div>
+            <div className="ui segment">
+              <div className="ui input focus">
+                <Field name="project_description" validate={required} component={renderTextArea} placeholder="Enter Project Description" />
+              </div>
+            </div>
+            <div className="ui segment">
+              <div className="ui input focus">
+                <Field name="tech_stack" validate={required} component={renderTextArea} placeholder="Tech stack used for project" />
+              </div>
+            </div>
+            <div className="ui segment">
+              <button type="submit" className="ui button" onClick={() => { setIsAdd(true) }}>
+                Add
+              </button>
+              <button type="submit" className="ui primary button">
+                Submit
+            </button>
             </div>
           </div>
-          <div className="ui segment">
-            <div class="ui input focus">
-              From <input type="date" placeholder="Select Date" onChange={(e) => {
-                projectDetails['fromDate'] = e.target.value
-                setProjectDetails(projectDetails)
-                setParentState('projectDetails', projectDetails)
-              }} /> To <input type="date" placeholder="Select Date" onChange={(e) => {
-                projectDetails['toDate'] = e.target.value
-                setProjectDetails(projectDetails)
-                setParentState('projectDetails', projectDetails)
-              }} />
-            </div>
-          </div>
-          <div className="ui segment">
-            <div class="ui textarea focus">
-              <textarea type="text" rows={4} cols={50} placeholder="Project Description" onChange={(e) => {
-                projectDetails['description'] = e.target.value
-                setProjectDetails(projectDetails)
-                setParentState('projectDetails', projectDetails)
-              }}></textarea>
-            </div>
-          </div>
-          <div className="ui segment">
-            <div class="ui textarea focus">
-              <textarea type="text" rows={4} cols={50} placeholder="Tech Stack" onChange={(e) => {
-                projectDetails['techStack'] = e.target.value
-                setProjectDetails(projectDetails)
-                setParentState('projectDetails', projectDetails)
-              }}></textarea>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
     </React.Fragment>
   );
 }
-export default ProjectDetails 
+
+const validate = (formValues) => {
+  let errors = {}
+
+  console.log(formValues)
+
+  Object.keys(formValues).map(item => {
+    if (!item) {
+      errors[item] = `Please enter ${item}`
+    }
+    return null
+  })
+
+  return errors
+}
+
+export default reduxForm({
+  form: 'projectDetails',
+  validate: validate
+})(ProjectDetails);

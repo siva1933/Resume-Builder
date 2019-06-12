@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/App.css';
-import PersonalDetails from './PersonalDetails';
-// import ProjectDetails from './ProjectDetails';
+// import PersonalDetails from './PersonalDetails';
+import ProjectDetails from './ProjectDetails';
 // import Education from './Education';
 // import Professional from './Professional';
 // import Hobbies from './Hobbies';
@@ -16,7 +16,15 @@ export default class App extends React.Component {
       <React.Fragment>
         <div className="ui container">
           <h3 className="ui center aligned header">Resume Builder</h3>
-          <PersonalDetails />
+          {/* <PersonalDetails /> */}
+
+          <ProjectDetails />
+
+
+
+
+
+
           {/*<Stepper setLS={() => localStorage.setItem('state', JSON.stringify(this.state))} steps={[<PersonalDetails setParentState={this.setParentState} />,
           <ProjectDetails setParentState={this.setParentState} />,
           <Education setParentState={this.setParentState} />,

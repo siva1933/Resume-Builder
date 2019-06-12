@@ -11,3 +11,24 @@
 body {
   height: auto;
 }
+
+.date_section {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.show_data_headings {
+  display: flex;
+  flex-direction: column;
+}
+
+.show_data_values {
+  display: flex;
+  flex-direction: column;
+}
+
+.project_data {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
