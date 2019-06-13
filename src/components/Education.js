@@ -1,68 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { reduxForm, Field } from 'redux-form';
+import { renderInput, renderTextArea } from '../globalComponents/formComponents';
+import { required } from '../globalComponents/validations';
 
-export default class Education extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { education: [], educationObj: {} };
+const Education = (props) => {
+
+  const [isAdd, setIsAdd] = useState(false)
+  const [educationDetails, setEducationDetails] = useState([])
+  const { handleSubmit } = props
+
+  const isAddSubmit = (formValues) => {
+    console.log(formValues, educationDetails)
+    setEducationDetails([...educationDetails, formValues])
+    props.reset()
+    setIsAdd(false)
   }
 
-  render() {
-    return (
-      <React.Fragment>
-        <div className="ui text container">
-          <h4 className="ui center aligned header">Education Details</h4>
-          <div className="ui segments">
-            {this.state.education && this.state.education.length ? <div>
-              {this.state.education.map((item) => (
-                <div>
-                  {item.name} {item.study} {item.address}
+  const submitEducationDetails = (formValues) => {
+    console.log(formValues, educationDetails)
+
+    setEducationDetails([...educationDetails, formValues])
+  }
+
+
+  return (
+    <React.Fragment>
+      <div className="ui text container">
+        <h4 className="ui center aligned header">Education Details</h4>
+        <div className="ui segments">
+          {educationDetails && educationDetails.length ? <div>
+            {educationDetails.map((item) => (
+              <div key={item.institute_name} className="ui segment project_data">
+                <div className="show_data_headings">
+
+                  <div><b>Institute Name: </b></div>
+                  <div><b>Study: </b></div>
+                  {item.address && <div><b>Address: </b></div>}
+
                 </div>
-              ))}
-            </div> : ''}
-            <div className="ui segment">
-              <div class="ui input focus">
-                <input type="text" placeholder="Name of Institute" onChange={(e) => {
-                  let obj = this.state.educationObj
-                  obj["name"] = e.target.value
-                  this.setState({
-                    educationObj: obj
-                  })
-                }}></input>
-              </div>
-            </div>
-            <div className="ui segment">
-              <div class="ui input focus">
-                <input type="text" placeholder="What do you study here ?" onChange={(e) => {
-                  let obj = this.state.educationObj
-                  obj["study"] = e.target.value
-                  this.setState({
-                    educationObj: obj
-                  })
-                }}></input>
-              </div>
-            </div>
-            <div className="ui segment">
-              <div class="ui textarea focus">
-                <textarea type="text" rows={4} cols={50} placeholder="Address of Institute" onChange={(e) => {
-                  let obj = this.state.educationObj
-                  obj["address"] = e.target.value
-                  this.setState({
-                    educationObj: obj
-                  })
-                }}></textarea>
-              </div>
-            </div>
-            <div className="ui segment">
-              <button className="ui primary button" onClick={() => {
-                let edu = [...this.state.education, this.state.educationObj]
-                this.setState({ education: edu, educationObj: {} }, () => this.props.setParentState('education', this.state.education))
+                <div className="show_data_values">
 
+                  <div>{item.institute_name}</div>
+                  <div>{item.study}</div>
+                  {item.address && <div>{item.address}</div>}
+
+                </div>
+              </div>
+            ))}
+          </div> : ''}
+          <form onSubmit={
+            handleSubmit(isAdd ? isAddSubmit : submitEducationDetails)
+          }
+          >
+            <div className="ui segment">
+              <Field name="institute_name" validate={required} placeholder="Name of Institute" component={renderInput} />
+            </div>
+            <div className="ui segment">
+              <Field name="study" validate={required} placeholder="What do you study here?" component={renderInput} />
+
+            </div>
+            <div className="ui segment">
+              <Field name="address" placeholder="Address of Institute (optional)" component={renderTextArea} />
+            </div>
+            <div className="ui segment">
+              <button type="submit" className="ui button" onClick={() => {
+                setIsAdd(true)
               }} >Add</button>
+              <button type="submit" className="ui primary button" >Submit</button>
             </div>
-          </div>
+          </form>
         </div>
+      </div>
 
-      </React.Fragment>
-    );
-  }
+    </React.Fragment>
+  );
 }
+
+const validate = (formValues) => {
+  let errors = {}
+
+  console.log(formValues)
+
+  Object.keys(formValues).map(item => {
+    if (!item) {
+      errors[item] = `Please enter ${item}`
+    }
+    return null
+  })
+
+  return errors
+}
+
+export default reduxForm({
+  form: 'educationDetails',
+  validate: validate
+})(Education);

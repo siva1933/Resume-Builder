@@ -43,7 +43,7 @@ const ProjectDetails = (props) => {
                 <div className="show_data_values">
 
                   <div>{item.project_title}</div>
-                  <div>{item.from_date}-{item.to_date}</div>
+                  <div>{item.from_date}  to  {item.to_date}</div>
                   <div>{item.project_description}</div>
                   <div>{item.tech_stack}</div>
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/App.css';
 // import PersonalDetails from './PersonalDetails';
-import ProjectDetails from './ProjectDetails';
-// import Education from './Education';
+// import ProjectDetails from './ProjectDetails';
+import Education from './Education';
 // import Professional from './Professional';
 // import Hobbies from './Hobbies';
 // import Languages from './Languages';
@@ -18,9 +18,9 @@ export default class App extends React.Component {
           <h3 className="ui center aligned header">Resume Builder</h3>
           {/* <PersonalDetails /> */}
 
-          <ProjectDetails />
+          {/* <ProjectDetails /> */}
 
-
+          <Education />,
 
 
 
