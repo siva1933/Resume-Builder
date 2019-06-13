@@ -2,8 +2,8 @@ import React from 'react';
 import '../styles/App.css';
 // import PersonalDetails from './PersonalDetails';
 // import ProjectDetails from './ProjectDetails';
-import Education from './Education';
-// import Professional from './Professional';
+// import Education from './Education';
+import Professional from './Professional';
 // import Hobbies from './Hobbies';
 // import Languages from './Languages';
 // import ShowResume from './ShowResume';
@@ -20,8 +20,8 @@ export default class App extends React.Component {
 
           {/* <ProjectDetails /> */}
 
-          <Education />,
-
+          {/* <Education /> */}
+          <Professional />
 
 
 
