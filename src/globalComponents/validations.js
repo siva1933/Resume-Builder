@@ -1,5 +1,5 @@
 export const required = value => (value || typeof value === 'number' ? undefined : 'Required')
-export const rating = value => (parseFloat(value)<5 ? undefined : 'Rating must be less than or equal 5')
+export const rating = value => parseFloat(value) > 5 ? 'Rating must be less than or equal 5' : undefined
 
 export const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined

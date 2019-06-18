@@ -6,6 +6,7 @@ import { required } from '../globalComponents/validations';
 const Education = (props) => {
 
   const [isAdd, setIsAdd] = useState(false)
+  const [isSame, setIsSame] = useState(false)
   const [educationDetails, setEducationDetails] = useState([])
   const { handleSubmit } = props
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { renderInput, renderTextArea } from '../globalComponents/formComponents';
-import { required, rating } from '../globalComponents/validations';
+import { required, rating,number } from '../globalComponents/validations';
 
 
 const Professional = (props) => {
@@ -56,7 +56,7 @@ const Professional = (props) => {
 
             </div>
             <div className="ui segment">
-              <Field name="rating" validate={[required,rating]} placeholder="How much do you rate yourself?" component={renderInput} />
+              <Field name="rating" validate={[required,rating]} warn={number}placeholder="How much do you rate yourself?" component={renderInput} />
 
             </div>
             <div className="ui segment">
