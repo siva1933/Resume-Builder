@@ -1,7 +1,26 @@
 import React, { useState } from 'react';
 import { Field, reduxForm } from 'redux-form'
-import { renderInput } from '../globalComponents/formComponents';
+import { renderInput, RadioGroup } from '../globalComponents/formComponents';
 import { required } from '../globalComponents/validations';
+
+const options = [
+  {
+    label: 'Native',
+    value: 'Native'
+  },
+  {
+    label: 'Beginner',
+    value: 'Beginner'
+  },
+  {
+    label: 'Intermediate',
+    value: 'Intermediate'
+  },
+  {
+    label: 'Fluent',
+    value: 'Fluent'
+  }
+]
 
 const Languages = (props) => {
 
@@ -18,6 +37,9 @@ const Languages = (props) => {
 
   const submitLanguageDetails = (formValues) => {
     console.log(formValues, languageDetails)
+    localStorage.setItem("languageDetails", JSON.stringify(languageDetails))
+
+    props.history.push('/resume')
 
     setLanguageDetails([...languageDetails, formValues])
   }
@@ -30,21 +52,26 @@ const Languages = (props) => {
         <div className="ui segments">
           {languageDetails && languageDetails.length ? <div>
             {languageDetails.map((item) => (
-              <div key={item.other} className="ui segment project_data">
+              <div key={item.lang} className="ui segment project_data">
                 <div className="show_data_headings">
 
                   <div><b>Language: </b></div>
+                  <div><b>Lang Type: </b></div>
 
                 </div>
                 <div className="show_data_values">
-                  <div>{item.other}</div>
+                  <div>{item.lang}</div>
+                  <div>{item.fluency}</div>
                 </div>
               </div>
             ))}
           </div> : ''}
           <form onSubmit={handleSubmit(isAdd ? isAddSubmit : submitLanguageDetails)}>
             <div className="ui segment">
-              <Field name="other" validate={[required]} placeholder={'Enter know languages'} component={renderInput} />
+              <Field name="lang" validate={[required]} placeholder={'Enter know languages'} component={renderInput} />
+            </div>
+            <div className="ui segment">
+              <Field name="fluency" component={RadioGroup} options={options} />
             </div>
             <div className="ui segment">
               <button type="submit" className="ui button" onClick={() => {
@@ -75,6 +102,7 @@ const validate = (formValues) => {
 }
 
 export default reduxForm({
-  form: 'langDetails',
-  validate: validate
+  form: 'languageDetails',
+  validate: validate,
+  destroyOnUnmount: false,
 })(Languages);

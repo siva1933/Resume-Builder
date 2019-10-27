@@ -2,13 +2,13 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { renderInput, renderTextArea } from '../globalComponents/formComponents';
 import { email, required, alphaNumeric, phoneNumber, maxLength } from '../globalComponents/validations';
-
-
+// import Header from './Header';
 
 class PersonalDetails extends React.Component {
 
   onSubmit = (formValues) => {
-    console.log('form valuessssssssssssssss', formValues)
+    localStorage.setItem('personalDetails', JSON.stringify(formValues))
+    this.props.history.push('/project')
     this.props.reset()
   }
 
@@ -16,6 +16,7 @@ class PersonalDetails extends React.Component {
     const { submitting } = this.props
     return (
       <React.Fragment>
+        {/* <Header /> */}
         <div className="ui text container">
           <h4 className="ui center aligned header">Personal Details</h4>
           <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form">
@@ -75,83 +76,9 @@ const validate = (formValues) => {
   return errors
 }
 
-// const PersonalDetails = ({ setParentState }) => {
-
-//   const [personalDetials, setPersonalDetails] = useState({})
-
-//   return (
-//     <React.Fragment>
-//       <div className="ui text container">
-//         <h4 className="ui center aligned header">Personal Details</h4>
-//         <div className="ui segments">
-//           <div className="ui segment">
-//             <div class="ui input focus">
-//               <input type="text" placeholder="Enter Name" onChange={(e) => {
-//                 personalDetials['name'] = e.target.value
-//                 setPersonalDetails(personalDetials)
-//                 setParentState('personalDetials', personalDetials)
-//               }}></input>
-//             </div>
-//           </div>
-//           <div className="ui segment">
-//             <div class="ui input focus">
-//               <input type="text" placeholder="Enter Role" onChange={(e) => {
-//                 personalDetials['role'] = e.target.value
-//                 setPersonalDetails(personalDetials)
-//                 setParentState('personalDetials', personalDetials)
-
-//               }}></input>
-//             </div>
-//           </div>
-//           <div className="ui segment">
-//             <div class="ui input focus">
-//               <input type="text" placeholder="Enter Email" onChange={(e) => {
-//                 personalDetials['email'] = e.target.value
-//                 setPersonalDetails(personalDetials)
-//                 setParentState('personalDetials', personalDetials)
-
-//               }}></input>
-//             </div>
-//           </div>
-//           <div className="ui segment">
-//             <div class="ui input focus">
-//               <input type="text" placeholder="Enter Mobile Number" onChange={(e) => {
-//                 personalDetials['mobile'] = e.target.value
-//                 setPersonalDetails(personalDetials)
-//                 setParentState('personalDetials', personalDetials)
-
-//               }}></input>
-//             </div>
-//           </div>
-//           <div className="ui segment">
-//             <div class="ui textarea focus">
-//               <textarea type="text" rows={4} cols={50} placeholder="Address" onChange={(e) => {
-//                 personalDetials['address'] = e.target.value
-//                 setPersonalDetails(personalDetials)
-//                 setParentState('personalDetials', personalDetials)
-
-//               }}></textarea>
-//             </div>
-//           </div>
-//           <div className="ui segment">
-//             <div class="ui textarea focus">
-//               <textarea type="text" rows={4} cols={50} placeholder="Summary" onChange={(e) => {
-//                 personalDetials['summary'] = e.target.value
-//                 setPersonalDetails(personalDetials)
-//                 setParentState('personalDetials', personalDetials)
-
-//               }}></textarea>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//     </React.Fragment>
-//   );
-// }
-
 
 export default reduxForm({
   form: 'personalDetails',
-  validate: validate
+  validate: validate,
+  destroyOnUnmount: false,
 })(PersonalDetails);

@@ -1,41 +1,38 @@
 import React from 'react';
 import '../styles/App.css';
-// import PersonalDetails from './PersonalDetails';
-// import ProjectDetails from './ProjectDetails';
-// import Education from './Education';
-// import Professional from './Professional';
-import Hobbies from './Hobbies';
-// import Languages from './Languages';
-// import ShowResume from './ShowResume';
-// import { Stepper } from './Stepper';
+import Routes from './routes';
+import { withRouter } from 'react-router-dom'
 
+class App extends React.Component {
+  state = {
+    showButton: true
+  }
 
-export default class App extends React.Component {
+  componentDidMount() {
+    if (localStorage.getItem('showButton') !== null) {
+      this.setState({
+        showButton: JSON.parse(localStorage.getItem('showButton'))
+      })
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
         <div className="ui container">
           <h3 className="ui center aligned header">Resume Builder</h3>
-          {/* <PersonalDetails /> */}
-
-          {/* <ProjectDetails /> */}
-
-          {/* <Education /> */}
-          {/* <Professional /> */}
-          <Hobbies />,
-
-          {/* <Languages /> */}
-
-
-          {/*<Stepper setLS={() => localStorage.setItem('state', JSON.stringify(this.state))} steps={[<PersonalDetails setParentState={this.setParentState} />,
-          <ProjectDetails setParentState={this.setParentState} />,
-          <Education setParentState={this.setParentState} />,
-          <Professional setParentState={this.setParentState} />,
-          <Hobbies setParentState={this.setParentState} />,
-          <Languages setParentState={this.setParentState} />, <ShowResume />]} /> */}
-
+          {this.state.showButton && <button onClick={() => {
+            this.setState({
+              showButton: false
+            })
+            localStorage.setItem('showButton', false)
+            this.props.history.push('/personal')
+          }} className="ui primary button">Enter your details</button>}
+          {Routes}
         </div>
       </React.Fragment>
     );
   }
 }
+
+export default withRouter(App)

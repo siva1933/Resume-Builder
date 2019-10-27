@@ -6,7 +6,6 @@ import { required } from '../globalComponents/validations';
 const Education = (props) => {
 
   const [isAdd, setIsAdd] = useState(false)
-  const [isSame, setIsSame] = useState(false)
   const [educationDetails, setEducationDetails] = useState([])
   const { handleSubmit } = props
 
@@ -19,7 +18,8 @@ const Education = (props) => {
 
   const submitEducationDetails = (formValues) => {
     console.log(formValues, educationDetails)
-
+    localStorage.setItem("educationDetails", JSON.stringify(educationDetails))
+    props.history.push('/proffessional')
     setEducationDetails([...educationDetails, formValues])
   }
 
@@ -94,5 +94,6 @@ const validate = (formValues) => {
 
 export default reduxForm({
   form: 'educationDetails',
-  validate: validate
+  validate: validate,
+  destroyOnUnmount: false
 })(Education);

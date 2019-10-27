@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { renderInput, renderTextArea } from '../globalComponents/formComponents';
-import { required, rating,number } from '../globalComponents/validations';
+import { required, rating, number } from '../globalComponents/validations';
 
 
 const Professional = (props) => {
@@ -19,7 +19,8 @@ const Professional = (props) => {
 
   const submitProfessionalDetails = (formValues) => {
     console.log(formValues, professionalDetails)
-
+    localStorage.setItem("professionalDetails", JSON.stringify(professionalDetails))
+    props.history.push('/hobbies')
     setProfessionalDetails([...professionalDetails, formValues])
   }
 
@@ -56,7 +57,7 @@ const Professional = (props) => {
 
             </div>
             <div className="ui segment">
-              <Field name="rating" validate={[required,rating]} warn={number}placeholder="How much do you rate yourself?" component={renderInput} />
+              <Field name="rating" validate={[required, rating]} warn={number} placeholder="How much do you rate yourself?" component={renderInput} />
 
             </div>
             <div className="ui segment">
@@ -91,5 +92,6 @@ const validate = (formValues) => {
 
 export default reduxForm({
   form: 'professionalDetails',
-  validate: validate
+  validate: validate,
+  destroyOnUnmount: false,
 })(Professional);

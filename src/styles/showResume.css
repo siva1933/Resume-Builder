@@ -57,6 +57,7 @@
 .project_content {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .profile_name {
@@ -97,7 +98,8 @@ page[size="A4"][layout="landscape"] {
 }
 
 .project_head_section {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  /* width: 200%; */
 }
 
 .education_content {

@@ -17,6 +17,8 @@ const ProjectDetails = (props) => {
 
   const submitProjectDetails = (formValues) => {
     console.log(formValues, projectDetails)
+    localStorage.setItem('projectDetails', JSON.stringify(projectDetails))
+    props.history.push('/education')
 
     setProjectDetails([...projectDetails, formValues])
   }
@@ -108,5 +110,6 @@ const validate = (formValues) => {
 
 export default reduxForm({
   form: 'projectDetails',
-  validate: validate
+  validate: validate,
+  destroyOnUnmount: false,
 })(ProjectDetails);
